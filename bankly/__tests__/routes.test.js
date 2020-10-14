@@ -158,10 +158,11 @@ describe("PATCH /users/[username]", function() {
     });
   });
 
-  test("should patch data if admin", async function() {
+  // Modify test to make sure Bug #2 fix doesn't prevent admins from updating
+  test("should patch data if admin and allow admin to update admin field", async function() {
     const response = await request(app)
       .patch("/users/u1")
-      .send({ _token: tokens.u3, first_name: "new-fn1" }); // u3 is admin
+      .send({ _token: tokens.u3, first_name: "new-fn1", admin: true }); // u3 is admin
     expect(response.statusCode).toBe(200);
     expect(response.body.user).toEqual({
       username: "u1",
@@ -169,7 +170,7 @@ describe("PATCH /users/[username]", function() {
       last_name: "ln1",
       email: "email1",
       phone: "phone1",
-      admin: false,
+      admin: true,
       password: expect.any(String)
     });
   });
