@@ -17,7 +17,13 @@ const { authUser, requireLogin, requireAdmin } = require('../middleware/auth');
 
 router.get('/', authUser, requireLogin, async function(req, res, next) {
   try {
+    // Bug #4 - map over return data to exclude phone and email
     let users = await User.getAll();
+    users = users.map((user) => ({
+      username: user.username,
+      first_name: user.first_name,
+      last_name: user.last_name
+    }))
     return res.json({ users });
   } catch (err) {
     return next(err);

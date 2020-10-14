@@ -105,6 +105,17 @@ describe("GET /users", function() {
     expect(response.statusCode).toBe(200);
     expect(response.body.users.length).toBe(3);
   });
+
+  test("should only include username, first, and last names for users", async function() {
+    const response = await request(app)
+      .get("/users")
+      .send({ _token: tokens.u1 });
+    expect(response.body.users[0]).toEqual({
+      username: "u1",
+      first_name: "fn1",
+      last_name: "ln1",
+    });
+  });
 });
 
 describe("GET /users/[username]", function() {
