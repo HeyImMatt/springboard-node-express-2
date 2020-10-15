@@ -186,10 +186,17 @@ describe("PATCH /users/[username]", function() {
     });
   });
 
-  test("should disallow patching not-allowed-fields", async function() {
+  test("should disallow user setting themself to admin", async function() {
     const response = await request(app)
       .patch("/users/u1")
       .send({ _token: tokens.u1, admin: true });
+    expect(response.statusCode).toBe(401);
+  });
+  
+  test("should disallow patching not allowed fields", async function() {
+    const response = await request(app)
+      .patch("/users/u1")
+      .send({ _token: tokens.u1, username: 'badUser', password: 'notAllowed' });
     expect(response.statusCode).toBe(401);
   });
 
