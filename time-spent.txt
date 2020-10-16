@@ -5,8 +5,8 @@ Start: 8:45 am 10/14/2020
 End:
 
 Total time:  
-Conceptual Questions: 
-Timeword Problem: 
+Conceptual Questions: 45 minutes
+Timeword Problem and tests: 1 hour
 Buggy App:
 
 Target time: 10-15 hours

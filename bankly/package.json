@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "seed": "dropdb bankly && createdb bankly && psql bankly < data.sql && dropdb bankly_test && createdb bankly_test && psql bankly_test < data.sql",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
